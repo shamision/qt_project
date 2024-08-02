@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import './App.css'
-import BlogList from './components/BlogsList';
-import Sidebar from './components/SideBar';
-import BlogForm from './components/BlogForm';
-import Blog from './components/Blog';
-import SignupForm from './components/SignUp';
-import LoginForm from './components/Login';
-
+import "./App.css"
+import Blog from "./components/Blog"
+// import SignupForm from "./components/SignUp"
+// import LoginForm from "./components/Login"
+// import BlogList from "./components/BlogsList"
+// import Sidebar from "./components/SideBar"
 function App() {
   return (
     <div className="relative">
       {/* <Sidebar />
-      <div className="ml-64">
+      <div className="md:ml-64 ml-0">
         <BlogList />
       </div> */}
-      <LoginForm />
+      <Blog />
+      {/* <LoginForm /> */}
+
+      {/* <SignupForm /> */}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
