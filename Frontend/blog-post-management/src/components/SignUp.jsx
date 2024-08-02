@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 
 const SignupForm = () => {
+
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -18,7 +20,8 @@ const SignupForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post("http://127.0.0.1:8000/api/register",formData)
+        console.log(formData);
+        axios.post("http://127.0.0.1:8000/api/register/",formData)
             .then((response) => {
 
                 console.log('User registered:', response.data);
