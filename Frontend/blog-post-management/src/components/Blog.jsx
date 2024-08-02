@@ -10,20 +10,22 @@ const Blog = () => {
   console.log(`id: ${id}`);
   const [blog, setBlog] = useState(null);
 
+useEffect( ()=>{
   try {
-        axios.get(`http://localhost:8000/api/retrieve_blog/${id}/`)
-        .then(response => {
-          setBlog(response.data);
-        console.log(response.data);
-        })
-        
-    } catch (error) {
-        console.error('Error fetching blog:', error);
-    }
+    axios.get(`http://localhost:8000/api/retrieve_blog/${id}/`)
+    .then(response => {
+      setBlog(response.data);
+    console.log(response.data);
+    })
+    
+} catch (error) {
+    console.error('Error fetching blog:', error);
+}
 
-    if (!blog) {
-      return <div>Loading...</div>;
-  }
+if (!blog) {
+  return <div>Loading...</div>;
+}},[]
+)
 
   return (
     <div className="flex flex-col items-center md:h-screen h-full bg-[#E7ECFF] pt-[50px] md:pl-[20px] pl-6 pr-6 md:pr-0">
