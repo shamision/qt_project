@@ -16,6 +16,16 @@ class BlogSerializer(serializers.ModelSerializer):
         model = Blog
         fields = ['id', 'title', 'content', 'author', 'created_at', 'updated_at']
 
+    def create(self, validated_data):
+
+        request = self.context.get("request")
+        if request and hasattr(request,"user"):
+            instance = Blog.objects.create(author=request.user,**validated_data)
+            return instance
+        else:
+            raise serializers.ValidationError("The user must be logged in")
+        
+
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment

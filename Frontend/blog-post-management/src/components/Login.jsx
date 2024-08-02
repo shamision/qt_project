@@ -1,14 +1,15 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     // Handle form submission logic here
-  }
+  };
 
   return (
     <div className="w-screen flex justify-center items-center h-screen px-6">
@@ -57,14 +58,14 @@ const LoginForm = () => {
         </form>
         <p>
           Don't have an account?{" "}
-          <a href="#" className="text-[#111B47] underline">
+          <Link to="/signup" className="text-[#111B47] underline">
             Signup
-          </a>
+          </Link>
         </p>
         {error && <p className="text-red-500 text-center">{error}</p>}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

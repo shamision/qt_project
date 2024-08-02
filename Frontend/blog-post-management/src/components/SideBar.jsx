@@ -1,9 +1,10 @@
-import { AnimatePresence, motion } from "framer-motion"
-import { useEffect, useRef, useState } from "react"
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const ref = useRef(null)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -12,15 +13,15 @@ const Sidebar = () => {
         !ref.current.contains(event.target) &&
         !event.target.closest(".menu-toggle")
       ) {
-        setMenuOpen(false)
+        setMenuOpen(false);
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [ref])
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
 
   return (
     <>
@@ -31,24 +32,24 @@ const Sidebar = () => {
         <nav className="flex-1 p-4">
           <ul>
             <li className="my-2">
-              <a href="#" className="block p-2 rounded hover:bg-gray-700">
-                Home
-              </a>
+              <Link to="/" className="block p-2 rounded hover:bg-gray-700">
+                Blog List
+              </Link>
             </li>
             <li className="my-2">
-              <a href="#" className="block p-2 rounded hover:bg-gray-700">
-                About
-              </a>
+              <Link to="/blog-form" className="block p-2 rounded hover:bg-gray-700">
+                Create Blog
+              </Link>
             </li>
             <li className="my-2">
-              <a href="#" className="block p-2 rounded hover:bg-gray-700">
-                Services
-              </a>
+              <Link to="/signup" className="block p-2 rounded hover:bg-gray-700">
+                Sign Up
+              </Link>
             </li>
             <li className="my-2">
-              <a href="#" className="block p-2 rounded hover:bg-gray-700">
-                Contact
-              </a>
+              <Link to="/login" className="block p-2 rounded hover:bg-gray-700">
+                Log In
+              </Link>
             </li>
           </ul>
         </nav>
@@ -60,7 +61,7 @@ const Sidebar = () => {
       </div>
 
       <div
-        className="md:hidden block fixed top-5 left-4"
+        className="md:hidden block fixed top-5 left-4 menu-toggle"
         onClick={() => setMenuOpen((prev) => !prev)}
       >
         <svg
@@ -90,20 +91,26 @@ const Sidebar = () => {
           >
             <ul className="space-y-6 px-4 py-20">
               <li className="bg-white opacity-100 h-8 w-full text-black text-base text-center flex justify-center items-center rounded-xl">
-                Home
+                <Link to="/">Blog List</Link>
               </li>
               <li className="bg-white opacity-100 h-8 w-full text-black text-base text-center flex justify-center items-center rounded-xl">
-                Blog list
+                <Link to="/blog-form">Create Blog</Link>
               </li>
               <li className="bg-white opacity-100 h-8 w-full text-black text-base text-center flex justify-center items-center rounded-xl">
-                Create
+                <Link to="/signup">Sign Up</Link>
+              </li>
+              <li className="bg-white opacity-100 h-8 w-full text-black text-base text-center flex justify-center items-center rounded-xl">
+                <Link to="/login">Log In</Link>
+              </li>
+              <li className="bg-white opacity-100 h-8 w-full text-black text-base text-center flex justify-center items-center rounded-xl">
+                <Link to="/logout">Logout</Link>
               </li>
             </ul>
           </motion.div>
         )}
       </AnimatePresence>
     </>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -27,9 +27,9 @@ def register_user(request):
 @permission_classes([IsAuthenticated])
 def blog_post(request):
   
-    serializer = BlogSerializer(data=request.data)
+    serializer = BlogSerializer(data=request.data, context={"request":request})
     if serializer.is_valid():
-        serializer.save(author=request.user)
+        serializer.save()
         message ={
             'message': 'Blog post created successfully!',
         }
