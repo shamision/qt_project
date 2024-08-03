@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./comments/Comment";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Blog = () => {
   const { id } = useParams();
@@ -10,6 +10,8 @@ const Blog = () => {
   const [error, setError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({ title: '', content: '' });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -35,13 +37,38 @@ const Blog = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const accessToken = localStorage.getItem('access_token');
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8000/api/update_blog/${id}/`, formData);
+      
+      const response = await axios.put(`http://localhost:8000/api/blogs/${id}/`, formData,
+        {
+          headers: {
+              Authorization: `Bearer ${accessToken}`,
+          },
+      }
+      );
       setBlog(response.data);
       setIsEditing(false);
+    } catch (err) {
+      setError('Error updating blog');
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      
+      const response = await axios.delete(`http://localhost:8000/api/blogs/${id}/`,
+        {
+          headers: {
+              Authorization: `Bearer ${accessToken}`,
+          },
+      }
+      );
+     console.log(response.data);
+      navigate("/")
     } catch (err) {
       setError('Error updating blog');
     }
@@ -98,17 +125,17 @@ const Blog = () => {
             <button onClick={handleEditClick} className="bg-[#111B47] w-[180px] h-[60px] rounded-md text-white mt-[30px]">
               Update
             </button>
-            <button className="bg-red-800 w-[180px] h-[60px] rounded-md text-white mt-[30px]">
+            <button onClick={handleDelete} className="bg-red-800 w-[180px] h-[60px] rounded-md text-white mt-[30px]">
               Delete
             </button>
           </div>
         </>
       )}
       <hr className="bg-gray-400 md:w-[600px] w-full h-1 mt-5" />
-      <button className="bg-[#111B47] w-[180px] h-[60px] rounded-md text-white mt-[30px]">
+      {/* <button className="bg-[#111B47] w-[180px] h-[60px] rounded-md text-white mt-[30px]">
         Comment
-      </button>
-      <Comment />
+      </button> */}
+      {/* <Comment /> */}
     </div>
   );
 };
