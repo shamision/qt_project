@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.permissions import IsAuthenticated, AllowAny
-
+from django.contrib.auth.hashers import make_password
 
 
 @api_view(['POST'])
@@ -14,6 +14,10 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 def register_user(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
+        password = serializer.validated_data.get('password')
+        hashed_password = make_password(password)
+        serializer.validated_data['password'] = hashed_password
+
         user = serializer.save()
         refresh = RefreshToken.for_user(user)
         return Response({
