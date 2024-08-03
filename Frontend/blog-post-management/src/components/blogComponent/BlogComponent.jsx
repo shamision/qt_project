@@ -21,7 +21,7 @@ useEffect(() => {
 
     <div>
       {blogs.map((blog,index) => (
-      <Link to={`/blog/${blog.id}`} key={blog.id} className="h-[50px] md:w-[800px] w-full bg-white rounded-2xl flex justify-between items-center md:px-10 py-10 px-2  shadow-lg mb-5">
+      <Link to={`/blog/${blog.id}`} key={blog.id} className="h-[150px] md:w-[800px] w-full bg-white rounded-2xl flex justify-between items-center md:px-10 py-10 px-2  shadow-lg mb-5">
       
       <div>
         <h1 className="font-bold text-[#111B47]">{blog.title}</h1>
