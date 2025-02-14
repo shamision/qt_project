@@ -25,7 +25,7 @@ This project is a Blog Management System built with Django for the backend and R
 
    ```bash
    git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+   cd your-repo     
 
 ## Backend Setup:
 
@@ -96,7 +96,7 @@ This project is a Blog Management System built with Django for the backend and R
 ## Scripts
 
 -- Script 1: Insert Blog Post 1
-INSERT INTO blog_blog (title, content, author, created_at, updated_at)
+INSERT  INTO blog_blog (title, content, author, created_at, updated_at)
 VALUES 
 ('First Blog Post', 'This is the content of the first blog post.', 'author_username_1', NOW(), NOW());
 
